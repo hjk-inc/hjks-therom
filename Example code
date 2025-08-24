@@ -1,0 +1,37 @@
+# hjks_theorem.py
+# Demonstration of HJK's Theorem
+
+class Node:
+    def __init__(self, name, is_root=False):
+        self.name = name
+        self.is_root = is_root
+        self.children = []
+
+    def add_leaf(self, leaf):
+        self.children.append(leaf)
+
+    def __repr__(self):
+        return f"{'Root' if self.is_root else 'Leaf'}({self.name})"
+
+
+# Build Example
+root = Node("R1", is_root=True)
+leaf1 = Node("L1")
+leaf2 = Node("L2")
+
+root.add_leaf(leaf1)
+root.add_leaf(leaf2)
+
+# Check stability
+def check_stability(root):
+    if not root.is_root:
+        return False
+    for child in root.children:
+        if not child:  # no leaf
+            return False
+    return True
+
+print("HJK's Theorem Demonstration")
+print("Root:", root)
+print("Children:", root.children)
+print("Stable System:", check_stability(root))
